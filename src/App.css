@@ -1,38 +1,145 @@
-.App {
+@import "https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700";
+
+body {
+  font-family: "Poppins", sans-serif;
+  background: #fafafa;
+}
+
+p {
+  font-family: "Poppins", sans-serif;
+  font-size: 1.1em;
+  font-weight: 300;
+  line-height: 1.7em;
+  color: #999;
+}
+
+a,
+a:hover,
+a:focus {
+  color: inherit;
+  text-decoration: none;
+  transition: all 0.3s;
+}
+
+.wrapper {
+  display: flex;
+  align-items: stretch;
+}
+
+/* SIDEBAR */
+
+.nav-logo {
+  width: 55px;
+  border-radius: 10px;
+}
+
+#sidebar.active {
+  margin-left: -250px;
+}
+
+#sidebar {
+  min-width: 100px;
+  max-width: 100px;
+  min-height: 100vh;
+  background: #000000;
+  color: #fff;
+  transition: all 0.3s;
+}
+
+#sidebar .sidebar-header {
+  padding: 20px;
+  background: #000000;
+}
+
+#sidebar ul p {
+  color: #fff;
+  padding: 10px;
+}
+
+#sidebar ul li a {
+  padding: 10px;
+  font-size: 1.1em;
+  display: block;
+}
+
+/* LOGIN FORM */
+
+.login-form {
+  width: 100%;
+  border: solid 1px;
+  border-radius: 10px;
+  background-color: rgb(221, 228, 228);
+}
+
+.main-img {
+  width: 100%;
+  height: 700px;
+  object-fit: cover;
+  object-position: center;
+  border-radius: 10px;
+}
+
+.form-input-setting {
+  padding: 0 100px 30px 100px;
+}
+
+.form-input-setting input {
+  border-radius: 30px;
   text-align: center;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+.btn-main-container button {
+  border-radius: 30px;
+  width: 125px;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+/* KANBAN */
+.container-group-task {
+  border: solid 1px;
+  border-radius: 10px;
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+.title-box {
+  border: solid 1px;
+  border-radius: 10px;
+  width: fit-content;
+  padding: 0 15px;
 }
 
-.App-link {
-  color: #61dafb;
+.scrollable {
+  overflow: scroll;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.task-list {
+  height: 100px;
+  border: solid 1px;
+  border-radius: 10px;
+}
+
+.task-list p {
+  margin: 0;
+  padding-top: 3px;
+}
+
+.task-list-empty {
+  background-color: #fff !important;
+}
+
+.three-dots-btn {
+  cursor: pointer;
+  position: absolute;
+  right: 15px;
+  bottom: 10px;
+}
+
+.progress-meter {
+  position: absolute;
+  bottom: 10px;
+  left: 0px;
+}
+
+.percentage {
+  position: absolute;
+  bottom: -8px;
+  left: 125px;
 }
