@@ -6,10 +6,11 @@ export default function Sidebar() {
   const history = useHistory();
 
   const logout = () => {
+    localStorage.removeItem("auth_token");
     history.push("/login");
   };
 
-  const AddNewGroupTask = () => {
+  const createGroupModal = () => {
     console.log("Calibri");
   };
 
@@ -24,7 +25,7 @@ export default function Sidebar() {
           <p>RakaBan</p>
 
           <li className="text-center mb-3">
-            <button onClick={AddNewGroupTask} className="btn btn-light">
+            <button onClick={createGroupModal} className="btn btn-light">
               New
             </button>
           </li>

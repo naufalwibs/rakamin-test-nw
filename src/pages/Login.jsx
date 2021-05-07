@@ -1,9 +1,21 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import LoginImg from "../assets/login-img.png";
 import { useHistory } from "react-router-dom";
+import Swal from "sweetalert2";
+import withReactContent from "sweetalert2-react-content";
+import { useDispatch, useSelector } from "react-redux";
+import { userLogin } from "../store/actions";
+
+const MySwal = withReactContent(Swal);
 
 export default function Login() {
+  const dispatch = useDispatch();
   const history = useHistory();
+  const { isLoading, error } = useSelector((state) => state.todosReducer);
+  const [values, setValues] = useState({
+    email: "",
+    password: "",
+  });
 
   const toRegisterPage = (e) => {
     e.preventDefault();
@@ -12,8 +24,58 @@ export default function Login() {
 
   const login = (e) => {
     e.preventDefault();
-    history.push("/todos");
+    if (!values.email) {
+      MySwal.fire({
+        toast: true,
+        position: "top",
+        showConfirmButton: false,
+        timer: 3000,
+        timerProgressBar: true,
+        icon: "error",
+        title: "Email can't be empty",
+        didOpen: (toast) => {
+          toast.addEventListener("mouseenter", Swal.stopTimer);
+          toast.addEventListener("mouseleave", Swal.resumeTimer);
+        },
+      });
+    } else if (!values.password) {
+      MySwal.fire({
+        toast: true,
+        position: "top",
+        showConfirmButton: false,
+        timer: 3000,
+        timerProgressBar: true,
+        icon: "error",
+        title: "Password can't be empty",
+        didOpen: (toast) => {
+          toast.addEventListener("mouseenter", Swal.stopTimer);
+          toast.addEventListener("mouseleave", Swal.resumeTimer);
+        },
+      });
+    } else {
+      dispatch(userLogin(values));
+      setValues({
+        email: "",
+        password: "",
+      });
+    }
   };
+
+  const handleInputChange = (e) => {
+    const { name, value } = e.target;
+
+    setValues({
+      ...values,
+      [name]: value,
+    });
+  };
+
+  useEffect(() => {
+    console.log(error);
+    if (!isLoading && localStorage.auth_token) {
+      history.push("/todos");
+    }
+  }, [isLoading]);
 
   return (
     <>
@@ -29,6 +91,9 @@ export default function Login() {
                   <div className="col form-input-setting">
                     <div className="mb-3">
                       <input
+                        onChange={handleInputChange}
+                        name="email"
+                        value={values.email}
                         type="email"
                         className="form-control"
                         placeholder="Email"
@@ -36,6 +101,9 @@ export default function Login() {
                     </div>
                     <div className="mb-3">
                       <input
+                        onChange={handleInputChange}
+                        name="password"
+                        value={values.password}
                         type="password"
                         className="form-control"
                         placeholder="Password"
